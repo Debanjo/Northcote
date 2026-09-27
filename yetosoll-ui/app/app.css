@@ -1,0 +1,214 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "@fontsource-variable/geist";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+html,
+body {
+  @apply bg-white text-black;
+}
+
+:root {
+  --background: 255 255 255;
+  --foreground: 18 18 18;
+  --card: 255 255 255;
+  --card-foreground: 18 18 18;
+  --popover: 255 255 255;
+  --popover-foreground: 18 18 18;
+  --primary: 245 166 35;
+  --primary-foreground: 18 18 18;
+  --secondary: 74 144 226;
+  --secondary-foreground: 255 255 255;
+  --muted: 245 245 245;
+  --muted-foreground: 100 100 100;
+  --accent: 245 166 35;
+  --accent-foreground: 18 18 18;
+  --destructive: 239 68 68;
+  --border: 229 231 235;
+  --input: 229 231 235;
+  --ring: 245 166 35;
+  --radius: 0.625rem;
+  --sidebar: 255 255 255;
+  --sidebar-foreground: 18 18 18;
+  --sidebar-primary: 245 166 35;
+  --sidebar-primary-foreground: 18 18 18;
+  --sidebar-accent: 74 144 226;
+  --sidebar-accent-foreground: 255 255 255;
+  --sidebar-border: 229 231 235;
+  --sidebar-ring: 245 166 35;
+}
+
+.dark {
+  --background: 18 18 18;
+  --foreground: 255 255 255;
+  --card: 30 30 30;
+  --card-foreground: 255 255 255;
+  --popover: 30 30 30;
+  --popover-foreground: 255 255 255;
+  --primary: 245 166 35;
+  --primary-foreground: 18 18 18;
+  --secondary: 74 144 226;
+  --secondary-foreground: 255 255 255;
+  --muted: 40 40 40;
+  --muted-foreground: 180 180 180;
+  --accent: 245 166 35;
+  --accent-foreground: 18 18 18;
+  --destructive: 239 68 68;
+  --border: 60 60 60;
+  --input: 60 60 60;
+  --ring: 245 166 35;
+  --sidebar: 18 18 18;
+  --sidebar-foreground: 255 255 255;
+  --sidebar-primary: 245 166 35;
+  --sidebar-primary-foreground: 18 18 18;
+  --sidebar-accent: 74 144 226;
+  --sidebar-accent-foreground: 255 255 255;
+  --sidebar-border: 60 60 60;
+  --sidebar-ring: 245 166 35;
+}
+
+@theme inline {
+  --color-background: rgb(var(--background));
+  --color-foreground: rgb(var(--foreground));
+  --color-card: rgb(var(--card));
+  --color-card-foreground: rgb(var(--card-foreground));
+  --color-popover: rgb(var(--popover));
+  --color-popover-foreground: rgb(var(--popover-foreground));
+  --color-primary: rgb(var(--primary));
+  --color-primary-foreground: rgb(var(--primary-foreground));
+  --color-secondary: rgb(var(--secondary));
+  --color-secondary-foreground: rgb(var(--secondary-foreground));
+  --color-muted: rgb(var(--muted));
+  --color-muted-foreground: rgb(var(--muted-foreground));
+  --color-accent: rgb(var(--accent));
+  --color-accent-foreground: rgb(var(--accent-foreground));
+  --color-destructive: rgb(var(--destructive));
+  --color-border: rgb(var(--border));
+  --color-input: rgb(var(--input));
+  --color-ring: rgb(var(--ring));
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-white border border-gray-200 rounded-xl shadow-sm;
+  }
+}
+
+/* ========== SIDEBAR ANIMATIONS & STYLING (NO OVERLAY ON TABLET) ========== */
+
+/* Sidebar slide animations */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOut {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+}
+
+[data-sidebar="sidebar"] {
+  background: white !important;
+  border-right: 1px solid #e5e7eb !important;
+  box-shadow: 2px 0 12px rgba(0, 0, 0, 0.02) !important;
+}
+
+[data-sidebar="sidebar"] [data-sidebar="content"] {
+  animation: slideIn 0.25s ease-out;
+}
+
+[data-sidebar="sidebar"][data-collapsed="true"] [data-sidebar="content"] {
+  animation: slideOut 0.2s ease-in;
+}
+
+/* Sidebar menu item hover and active states */
+[data-sidebar="menu-button"]:hover {
+  background: linear-gradient(to right, #fef9e7, #f0f9ff) !important;
+  border-left: 3px solid #f5a623 !important;
+}
+
+[data-sidebar="menu-button"][data-active="true"] {
+  background: linear-gradient(to right, #fef9e7, #e8f4fe) !important;
+  border-left: 3px solid #f5a623 !important;
+  color: #000 !important;
+  font-weight: 600 !important;
+}
+
+[data-sidebar="trigger"] {
+  color: #1f2937 !important;
+  background: transparent !important;
+}
+
+[data-sidebar="trigger"]:hover {
+  background: #f3f4f6 !important;
+}
+
+[data-sidebar="sidebar"][data-collapsed="true"] [data-sidebar="menu-button"] {
+  justify-content: center !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+[data-sidebar="sidebar"],
+[data-sidebar="sidebar"] * {
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* ========== RESPONSIVE UTILITIES ========== */
+.table-responsive {
+  @apply overflow-x-auto -mx-4 px-4;
+}
+
+.card-padding {
+  @apply p-4 sm:p-5 md:p-6;
+}
+
+.btn-responsive {
+  @apply h-9 px-3 text-sm sm:h-10 sm:px-4;
+}
+
+@layer utilities {
+  @keyframes pulseCustom {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.7;
+    }
+  }
+
+  .animate-pulse-custom {
+    animation: pulseCustom 1s cubic-bezier(0.8, 0.1, 0.8, 1) infinite;
+  }
+}

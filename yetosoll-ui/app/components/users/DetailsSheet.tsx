@@ -1,0 +1,100 @@
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetDescription,
+} from "@/components/ui/sheet";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import type { User as UserType } from "@/types";
+import Profile from "./tabs/profile.js";
+import ProjectActivity from "./tabs/ProjectActivity.js";
+import Inspections from "./tabs/Inspections.js";
+
+interface UserDetailsSheetProps {
+  user: UserType | null;
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+export function DetailsSheet({ user, isOpen, onClose }: UserDetailsSheetProps) {
+  if (!user) return null;
+
+  const isClient = user.role === "client";
+
+  return (
+    <Sheet open={isOpen} onOpenChange={onClose}>
+      <SheetContent
+        className="inset-y-4! right-4! h-auto! sm:max-w-xl rounded-xl border shadow-2xl p-0 overflow-hidden bg-white dark:bg-zinc-950 flex flex-col min-w-120"
+        side="right"
+      >
+        <div className="p-6 bg-gray-50 dark:bg-zinc-900 border-b shrink-0">
+          <SheetHeader className="flex flex-row items-center gap-4 space-y-0">
+            <Avatar className="h-16 w-16 border-2 border-white dark:border-zinc-800 shadow-sm">
+              <AvatarImage src={user.image || ""} />
+              <AvatarFallback className="text-lg font-bold bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300">
+                {user.name
+                  .split(" ")
+                  .map((n) => n[0])
+                  .join("")}
+              </AvatarFallback>
+            </Avatar>
+            <div className="flex-1">
+              <SheetTitle className="text-xl font-bold text-black dark:text-white">
+                {user.name}
+              </SheetTitle>
+              <SheetDescription className="flex items-center gap-2 mt-1">
+                <Badge variant="secondary" className="capitalize">
+                  {user.role.replace("_", " ")}
+                </Badge>
+                <Badge
+                  className={
+                    user.status === "active"
+                      ? "bg-green-100 text-green-800 hover:bg-green-100 border-green-200 dark:bg-green-900/30 dark:text-green-300"
+                      : user.status === "on_hold"
+                        ? "bg-yellow-100 text-yellow-800 hover:bg-yellow-100 border-yellow-200 dark:bg-yellow-900/30 dark:text-yellow-300"
+                        : user.status === "completed"
+                          ? "bg-light-blue-100 text-light-blue-800 hover:bg-light-blue-100 border-light-blue-200 dark:bg-light-blue-900/30 dark:text-light-blue-300"
+                          : "bg-gray-100 text-gray-800 hover:bg-gray-100 border-gray-200 dark:bg-gray-800 dark:text-gray-300"
+                  }
+                  variant="outline"
+                >
+                  {user.status?.replace("_", " ") || "Active"}
+                </Badge>
+              </SheetDescription>
+            </div>
+          </SheetHeader>
+        </div>
+        <ScrollArea className="min-h-150">
+          <div className="p-6">
+            <Tabs defaultValue="profile" className="w-full">
+              <TabsList
+                className={`grid w-full mb-6 ${isClient ? "grid-cols-3" : "grid-cols-1"}`}
+              >
+                <TabsTrigger value="profile">Profile</TabsTrigger>
+                {isClient && (
+                  <TabsTrigger value="activity">Project Activity</TabsTrigger>
+                )}
+                {isClient && (
+                  <TabsTrigger value="inspections">Site Inspections</TabsTrigger>
+                )}
+              </TabsList>
+              <TabsContent value="profile">
+                <Profile user={user} />
+              </TabsContent>
+              <TabsContent value="activity">
+                <ProjectActivity user={user} />
+              </TabsContent>
+              <TabsContent value="inspections">
+                <Inspections projectId={user._id} />
+              </TabsContent>
+            </Tabs>
+          </div>
+        </ScrollArea>
+      </SheetContent>
+    </Sheet>
+  );
+}

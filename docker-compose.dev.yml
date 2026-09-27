@@ -1,0 +1,58 @@
+version: "3.9"   # must be 3.9+ for develop/watch
+
+services:
+  mongo-local:
+    image: mongo:7
+    container_name: mongo-local
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: user
+      MONGO_INITDB_ROOT_PASSWORD: password
+    volumes:
+      - mongo-data:/data/db
+    healthcheck:
+      test: ["CMD", "mongo", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./yetosoll-server
+      dockerfile: Dockerfile.dev
+    ports:
+      - "5000:5000"
+    env_file: .env.development
+    depends_on:
+      mongo-local:
+        condition: service_healthy
+    develop:
+      watch:
+        - action: sync
+          path: ./yetosoll-server
+          target: /app
+          ignore:
+            - node_modules/
+        - action: rebuild
+          path: ./yetosoll-server/package.json
+
+  frontend:
+    build:
+      context: ./yetosoll-ui
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    env_file: .env.development
+    develop:
+      watch:
+        - action: sync
+          path: ./yetosoll-ui
+          target: /app
+          ignore:
+            - node_modules/
+        - action: rebuild
+          path: ./yetosoll-ui/package.json
+
+volumes:
+  mongo-data:

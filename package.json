@@ -1,0 +1,8 @@
+{
+    "name": "yetosoll-monorepo",
+    "private": true,
+    "workspaces": [
+        "yetosoll-ui",
+        "yetosoll-server"
+    ]
+}
