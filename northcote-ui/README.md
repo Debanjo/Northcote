@@ -2,7 +2,7 @@
 ## README.md (Full Content)
 
 ```markdown
-#  NorthCote – Construction Management Platform
+#  Yetosol Associates – Construction Management Platform
 
 Full‑stack monorepo for managing construction projects, clients, teams, invoices, site inspections, and real‑time communication. Built with **React + Vite** (frontend), **Express + MongoDB** (backend), **Better Auth** (authentication), and **Socket.io** (real‑time).
 
@@ -10,7 +10,7 @@ Full‑stack monorepo for managing construction projects, clients, teams, invoic
 
 ##  Product Overview
 
-NorthCote provides a unified portal for all stakeholders in construction projects:
+Yetosol Associates provides a unified portal for all stakeholders in construction projects:
 
 - **Clients** – track project progress, view milestones, download documents, message their team, and manage invoices.
 
@@ -28,9 +28,9 @@ Each role sees **only the data relevant to their responsibilities**, ensuring cl
 
 ```bash
 # Clone the repository
-git clone https://github.com/Debanjo/Northcote.git
+git clone https://github.com/yetosol/yetosolassociates.git
 
-cd NorthCote
+cd yetosolassociates
 
 # Install all dependencies (monorepo workspaces)
 npm install
@@ -69,11 +69,11 @@ VITE_API_URL=http://localhost:5000
 ##  Deployment
 
 ### Frontend (Vercel)
-1. Connect your GitHub repo (`northcote`).
+1. Connect your GitHub repo (`yetosol/yetosolassociates`).
 
 2. Set **Root Directory** → `northcote-ui`.
 
-3. Add Environment Variable: `VITE_API_URL` = `https://northcote.onrender.com`.
+3. Add Environment Variable: `VITE_API_URL` = `https://yetosolassociates.onrender.com`.
 
 4. Build command: `npm run build`, output directory: `build/client`.
 
@@ -91,7 +91,7 @@ VITE_API_URL=http://localhost:5000
 
 ### Push to Deploy
 ```powershell
-cd NorthCote    # monorepo root
+cd yetosolassociates    # monorepo root
 git add .
 git commit -m "Your commit message"
 git push
@@ -140,7 +140,7 @@ Data separation is enforced at the API level:
 
 ##  FULL API DOCUMENTATION:
 
-**Base URL:** `https://northcote.onrender.com/api`
+**Base URL:** `https://yetosolassociates.onrender.com/api`
 
 ### Authentication Endpoints (public)
 | Method | Endpoint | Description |
@@ -361,8 +361,6 @@ Empty datasets return `200` with an empty array – **never an error**.
 ```
 northcote-monorepo/
 ├── northcote-ui/          # React frontend (Vite + React Router v7)
-│   ├── dockerfile
-│   ├── dockerfile.dev
 │   ├── app/
 │   │   ├── components/   # Reusable UI components
 │   │   ├── routes/       # Page components
@@ -370,8 +368,6 @@ northcote-monorepo/
 │   │   └── ...
 │   └── ...
 ├── northcote-server/      # Express backend
-│   ├── dockerfile
-│   ├── dockerfile.dev
 │   ├── src/
 │   │   ├── controllers/  # Route handlers
 │   │   ├── models/       # Mongoose models
@@ -382,8 +378,6 @@ northcote-monorepo/
 │   │   └── ...
 │   └── ...
 ├── package.json          # Monorepo workspace root
-├── docker-compose.dev.yml
-├── docker-compose.prod.yml # Builds optimized backend (npm run start) and optimized frontend (React → Nginx).
 └── README.md
 ```
 
@@ -397,26 +391,3 @@ northcote-monorepo/
 
 - **DevOps:** Vercel (frontend), Render (backend), GitHub
 ```
-
-## Docker
-
-'''Local Development:
-
-bash
-docker-compose -f docker-compose.dev.yml up --build
-
-Runs backend in dev mode (npm run dev).
-
-Runs frontend in dev mode (npm run dev with hot reload).
-
-Runs MongoDB locally.
-
-Production Build:
-
-bash
-docker-compose -f docker-compose.prod.yml up --build -d
-Builds optimized backend (npm run start).
-
-Builds optimized frontend (React → Nginx).
-
-Connects to MongoDB Atlas (no local Mongo).'''

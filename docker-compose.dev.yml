@@ -19,7 +19,7 @@ services:
 
   backend:
     build:
-      context: ./yetosoll-server
+      context: ./northcote-server
       dockerfile: Dockerfile.dev
     ports:
       - "5000:5000"
@@ -30,16 +30,16 @@ services:
     develop:
       watch:
         - action: sync
-          path: ./yetosoll-server
+          path: ./northcote-server
           target: /app
           ignore:
             - node_modules/
         - action: rebuild
-          path: ./yetosoll-server/package.json
+          path: ./northcote-server/package.json
 
   frontend:
     build:
-      context: ./yetosoll-ui
+      context: ./northcote-ui
       dockerfile: Dockerfile.dev
     ports:
       - "3000:3000"
@@ -47,12 +47,12 @@ services:
     develop:
       watch:
         - action: sync
-          path: ./yetosoll-ui
+          path: ./northcote-ui
           target: /app
           ignore:
             - node_modules/
         - action: rebuild
-          path: ./yetosoll-ui/package.json
+          path: ./northcote-ui/package.json
 
 volumes:
   mongo-data:

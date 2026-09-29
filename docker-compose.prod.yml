@@ -3,7 +3,7 @@ version: "3.9"
 services:
   backend:
     build:
-      context: ./yetosoll-server
+      context: ./northcote-server
       dockerfile: Dockerfile
     ports:
       - "3051:5000"
@@ -16,7 +16,7 @@ services:
 
   frontend:
     build:
-      context: ./yetosoll-ui
+      context: ./northcote-ui
       dockerfile: Dockerfile
       args:
         VITE_API_URL: ${VITE_API_URL}

@@ -1,8 +1,8 @@
 {
-    "name": "yetosoll-monorepo",
+    "name": "northcote-monorepo",
     "private": true,
     "workspaces": [
-        "yetosoll-ui",
-        "yetosoll-server"
+        "northcote-ui",
+        "northcote-server"
     ]
 }
