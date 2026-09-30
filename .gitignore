@@ -7,4 +7,5 @@ npm-debug.log
 .env.development
 .env.production
 .vite/
-docker-compose*.yml
+docker-compose.dev.yml
+docker-compose.prod.yml
