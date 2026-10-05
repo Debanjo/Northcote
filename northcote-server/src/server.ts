@@ -47,7 +47,7 @@ const httpServer = createServer(app);
 initSocket(httpServer);
 app.set("io", getIO());
 
-const allowedOrigins = ["https://northcote.vercel.app"];
+const allowedOrigins = ["https://northcote-two.vercel.app/"];
 if (process.env.CORS_ORIGIN) {
   allowedOrigins.push(process.env.CORS_ORIGIN);
 }
