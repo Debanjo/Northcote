@@ -94,7 +94,7 @@ if (process.env.NODE_ENV === "development") {
 }
 
 app.get("/", (_req: Request, res: Response) => {
-  res.send("Yetosol API");
+  res.send("Northcote API");
 });
 
 app.all("/api/auth/*splat", toNodeHandler(auth));

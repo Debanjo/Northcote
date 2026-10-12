@@ -23,8 +23,8 @@ import { registerSchema, type RegisterFormValues } from "@/components/auth/regis
 
 export function meta() {
   return [
-    { title: "Register | Yetosol" },
-    { name: "description", content: "Create a new Yetosol account" },
+    { title: "Register | Northcote" },
+    { name: "description", content: "Create a new Northcote account" },
   ];
 }
 
@@ -108,7 +108,7 @@ export default function Register() {
             <Link to="/" className="inline-block mb-6">
               <img
                 src="https://res.cloudinary.com/ami1jzfj/image/upload/v1784851531/logo__z7qp82.png"
-                alt="Yetosol Associates"
+                alt="Northcote Logo"
                 className="h-28 sm:h-30 w-auto"
               />
             </Link>
@@ -116,7 +116,7 @@ export default function Register() {
               Create <span className="text-yellow-600">Your Account</span>
             </h1>
             <p className="text-gray-500 mt-4 text-lg max-w-md mx-auto lg:mx-0">
-              Join Yetosol and gain access to project tracking, real-time collaboration, and dedicated support for your construction needs.
+              Join Northcote and gain access to project tracking, real-time collaboration, and dedicated support for your construction needs.
             </p>
 
             {/* Trust indicators */}
@@ -193,7 +193,7 @@ export default function Register() {
                       <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
                       <input
                         type="email"
-                        placeholder="name@yetosol.com"
+                        placeholder="name@northcote.com"
                         className="w-full pl-12 pr-4 py-3 rounded-full bg-white border border-gray-200 text-gray-900 placeholder-gray-400 focus:border-sky-500 focus:ring-2 focus:ring-sky-100 outline-none transition-all"
                         {...register("email")}
                       />
